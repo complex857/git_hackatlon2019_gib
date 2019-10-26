@@ -114,6 +114,7 @@ export default class HomeScreen extends Component {
                 </View>
               ))}
             </View>
+            <Button title="Lets add a task!" onPress={() => navigation.push('Editor', {task: null}) } />
           </View>
         )}
       </View>

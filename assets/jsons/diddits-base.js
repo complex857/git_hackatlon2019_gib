@@ -1,5 +1,6 @@
 export default [
   {
+    "id":0,
     "name":"Get out of bed",
     "description":"Get out of bed! Come on!",
     "public":true,
