@@ -1,18 +1,98 @@
 import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
-import { Image, SafeAreaView, ScrollView, StyleSheet, Text, Alert, TouchableOpacity, View, Button } from 'react-native';
+import React, { useState, Component, Fragment } from 'react';
+import { Image, ActivityIndicator, ScrollView, StyleSheet, Text, Alert, TouchableOpacity, View, Button } from 'react-native';
+import AsyncStorage from "@callstack/async-storage";
 import { MonoText } from '../components/StyledText';
+import defaultTasks from '../assets/jsons/diddits-base';
 
-export default function ProgressScreen({ navigation }) {
-  const task = navigation.getParam('task')
+export default class ProgressScreen extends Component {
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.buttonContainer}>
-        <MonoText> World Domination ({task}) in progress </MonoText>
+  constructor(props) {
+    super(props);
+    this.state = {
+      task: null,
+      started: false,
+      finished: false,
+    }
+  }
+
+  componentWillMount() {
+    AsyncStorage.getItem("tasks").then(tasks => {
+      const task = [...defaultTasks, ...JSON.parse(tasks || '[]')].find((task) => task.name === this.props.navigation.getParam('task'))
+      this.setState(() => ({ task }))
+    });
+  }
+
+  setStarted = (value) => {
+    this.setState({started: value})
+  }
+
+  setFinished = async (value) => {
+    AsyncStorage.getItem("tasks_done").then(tasksDone => {
+      tasksDone = JSON.parse(tasksDone || '[]')
+
+      tasksDone = tasksDone.concat([{
+        task: this.state.task.name,
+        doneAt: (new Date()).toLocaleDateString() + ' ' + (new Date()).toLocaleTimeString(),
+      }])
+
+      AsyncStorage.setItem("tasks_done", JSON.stringify(tasksDone));
+      this.setState({finished: value})
+    });
+  }
+
+  beforeStart(task) {
+    return (
+      <Fragment>
+        <View style={styles.p}>
+          <Text>{task.description}</Text>
+        </View>
+        <View style={styles.p}>
+          <Text>
+            Difficulty (the points will earn): <Text style={{fontWeight: 'bold'}}>{task.points}</Text>
+          </Text>
+        </View>
+        <View style={styles.buttonContainer} >
+          <Button title="Start" onPress={() => this.setStarted(true) } />
+        </View>
+      </Fragment>
+    );
+  }
+  afterStart(task) {
+    return (
+      <View style={styles.buttonContainer} >
+        <Button title="I'am Done" onPress={() => this.setFinished(true) } />
       </View>
-    </View>
-  );
+    );
+  }
+
+  afterFinished(task) {
+    return (
+      <Fragment>
+      <Text style={styles.p}>Congratulations, you did a diddit!</Text>
+      <Text style={styles.p}>
+        Difficulty (the points will earn): <Text style={{fontWeight: 'bold'}}>{task.points}</Text>
+      </Text>
+      </Fragment>
+    );
+  }
+
+  render() {
+    const { task, started, finished } = this.state;
+
+    if (!task) {
+      return <ActivityIndicator size="large" color="#0000ff" />;
+    }
+    return (
+      <View style={styles.container}>
+        <Text style={styles.h1}>{task.tite}</Text>
+
+        {!started && this.beforeStart(task)}
+        {started  && !finished && this.afterStart(task)}
+        {finished && this.afterFinished(task)}
+      </View>
+    );
+  }
 }
 
 ProgressScreen.navigationOptions = {
@@ -34,5 +114,16 @@ const styles = StyleSheet.create({
     flex: 1,
     display: 'flex',
     margin: 10,
+  },
+  p: {
+    margin: 10,
+  },
+  dismissBtn: {
+    textAlign: 'center'
+  },
+  h1: {
+   margin: 10,
+   fontSize: 16,
+   fontWeight: 'bold'
   }
 });

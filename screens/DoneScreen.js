@@ -8,7 +8,7 @@ export default function DoneScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-    <MonoText> Task Done screen </MonoText>
+      <MonoText> Task Done screen </MonoText>
     </View>
   );
 }

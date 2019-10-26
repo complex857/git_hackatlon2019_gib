@@ -5,6 +5,17 @@ import { MonoText } from '../components/StyledText';
 import defaultTasks from '../assets/jsons/diddits-base';
 import AsyncStorage from "@callstack/async-storage";
 
+function shuffle(a) {
+  var j, x, i;
+  for (i = a.length - 1; i > 0; i--) {
+    j = Math.floor(Math.random() * (i + 1));
+    x = a[i];
+    a[i] = a[j];
+    a[j] = x;
+  }
+  return a;
+}
+
 export default class HomeScreen extends Component {
 
   constructor(props) {
@@ -68,7 +79,7 @@ export default class HomeScreen extends Component {
           <View style={{marginTop: 22}}>
             <Modal presentationStyle="overFullScreen" animationType="slide" transparent={false} visible={this.state.modalVisible} onRequestClose={() => { this.setModalVisible(false); }}>
               <View style={{marginTop: 22}}>
-                <Text style={{margin: 10, fontSize: 16, fontWeight: 'bold'}}>Hi There!</Text>
+                <Text style={styles.h1}>Hi There!</Text>
                 <View style={styles.p}>
                   <Text>Have this ever happened to you...</Text>
                   <Text>You wake up and have a hard time to decide why would you get out of bed?</Text>
@@ -97,9 +108,9 @@ export default class HomeScreen extends Component {
           <View>
             <Text style={{textAlign: 'center', margin: 10, fontSize: 22, fontWeight: 'bold'}}>Pick a diddit!</Text>
             <View style={{ flexDirection: 'row', width: '100%', flex: 1, padding: 20, height: 50 }}>
-              { tasks.map((task, i) => (
+              { shuffle(tasks).slice(0, 3).map((task, i) => (
                 <View key={`task-${i}`} style={styles.buttonContainer} >
-                  <Button title={task.name} onPress={() => navigation.push('Progress', {task: task.name}) } />
+                  <Button style={{padding: 20}} title={task.name} onPress={() => navigation.push('Progress', {task: task.name}) } />
                 </View>
               ))}
             </View>
@@ -135,6 +146,11 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   dismissBtn: {
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+  },
+  h1: {
+   margin: 10,
+   fontSize: 16,
+   fontWeight: 'bold'
+  },
 });
