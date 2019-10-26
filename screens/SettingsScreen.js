@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import AsyncStorage from "@callstack/async-storage";
 import { StyleSheet, Text, View, SafeAreaView, SectionList, } from 'react-native';
+import { withNavigationFocus } from 'react-navigation';
 import defaultTasks from '../assets/jsons/diddits-base';
 
 const findTask = (name, tasks) => {
@@ -21,7 +22,7 @@ function Item({item, tasks}) {
   );
 }
 
-export default class SettingsScreen extends Component {
+class SettingsScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,7 +31,7 @@ export default class SettingsScreen extends Component {
     }
   }
 
-  componentWillMount() {
+  fetchData = () => {
     AsyncStorage.getItem("tasks_done").then(tasksDone => {
       tasksDone = JSON.parse(tasksDone || '[]')
       this.setState({ tasksDone })
@@ -39,6 +40,28 @@ export default class SettingsScreen extends Component {
       tasks = [...defaultTasks, ...JSON.parse(tasks || '[]')]
       this.setState({ tasks })
     });
+  }
+
+  componentDidMount() {
+    this.fetchData();
+    this.subs = [
+      this.props.navigation.addListener('didFocus', () => this.fetchData()),
+    ];
+  }
+
+  totalPoints() {
+    const totalPoints = this.state.tasksDone.reduce((acc, td) => {
+      const task = findTask(td.task, this.state.tasks)
+      if (task) {
+        return acc + task.points;
+      }
+      return acc;
+    }, 0);
+    return (
+      <Text style={styles.p}>
+        The total points you earned: <Text style={{fontWeight: 'bold'}}>{totalPoints}</Text>
+      </Text>
+    );
   }
 
   noTasksDone() {
@@ -71,8 +94,8 @@ export default class SettingsScreen extends Component {
     return (
       <View style={styles.contentContainer}>
         <SafeAreaView style={styles.container}>
+          {this.totalPoints()}
           {this.state.tasksDone.length === 0 && this.noTasksDone() }
-          {this.state.tasksDone.length !== 0 && this.tasksDone() }
         </SafeAreaView>
       </View>
     );
@@ -107,3 +130,6 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
 });
+
+export default withNavigationFocus(SettingsScreen);
+

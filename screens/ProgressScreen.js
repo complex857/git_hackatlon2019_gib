@@ -33,11 +33,12 @@ export default class ProgressScreen extends Component {
 
       tasksDone = tasksDone.concat([{
         task: this.state.task.name,
+        rating: null,
         doneAt: (new Date()).toLocaleDateString() + ' ' + (new Date()).toLocaleTimeString(),
-      }])
+      }]);
 
       AsyncStorage.setItem("tasks_done", JSON.stringify(tasksDone));
-      this.setState({finished: value})
+      this.props.navigation.navigate('Done', {task: this.state.task.name, index: tasksDone.length - 1})
     });
   }
 
@@ -66,17 +67,6 @@ export default class ProgressScreen extends Component {
     );
   }
 
-  afterFinished(task) {
-    return (
-      <Fragment>
-      <Text style={styles.p}>Congratulations, you did a diddit!</Text>
-      <Text style={styles.p}>
-        Difficulty (the points will earn): <Text style={{fontWeight: 'bold'}}>{task.points}</Text>
-      </Text>
-      </Fragment>
-    );
-  }
-
   render() {
     const { task, started, finished } = this.state;
 
@@ -89,7 +79,6 @@ export default class ProgressScreen extends Component {
 
         {!started && this.beforeStart(task)}
         {started  && !finished && this.afterStart(task)}
-        {finished && this.afterFinished(task)}
       </View>
     );
   }
