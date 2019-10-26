@@ -1,4 +1,4 @@
-[
+export default [
   {
     "name":"Get out of bed",
     "description":"Get out of bed! Come on!",
@@ -10,5 +10,5 @@
     "points":10,
     "rewards":"low",
     "author":"Diddit Crew"
-  },
+  }
 ]
