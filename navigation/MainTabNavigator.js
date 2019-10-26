@@ -59,14 +59,14 @@ const StartStack = createStackNavigator(
   config
 );
 
-StartScreen.navigationOptions = {
+StartStack.navigationOptions = {
   tabBarLabel: 'Start',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
   ),
 };
 
-LinksStack.path = '';
+StartStack.path = '';
 
 const SettingsStack = createStackNavigator(
   {

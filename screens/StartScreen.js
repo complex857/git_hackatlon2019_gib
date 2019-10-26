@@ -10,8 +10,17 @@ import {
   View,
 } from 'react-native';
 
-export default function StartScreen() {
+export default class StartScreen extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentDate: new Date(),
+
+    };
+  }
+
+render() {
   return (
     <View style={styles.container}>
       <ScrollView
@@ -20,23 +29,31 @@ export default function StartScreen() {
 
         <View style={styles.welcomeContainer}>
           <Image
-            source={require('../assets/images/dont-panic.png')          }
+            source={
+              (this.state.currentDate.getDay() != 3)
+              ?
+              require('../assets/images/dont-panic.png')
+              :
+              {uri: 'https://www.trzcacak.rs/myfile/full/327-3275733_wednesday-frog-png-wednesday-my-dudes-frog-png.png'}
+            }
+
             style={styles.welcomeImage}
           />
         </View>
 
-
-        <Text>Routiney!</Text>
+        <Text>Diddit!</Text>
       </ScrollView>
     </View>
   );
-
-
+}
 }
 
 StartScreen.navigationOptions = {
   header: null,
-  title: 'app.json',
+  headerMode: 'none',
+  navigationOptions: {
+      headerVisible: false,
+  }
 };
 
 const styles = StyleSheet.create({
@@ -56,6 +73,7 @@ const styles = StyleSheet.create({
     width: "100%",
     minWidth: 300,
     height: "auto",
+    minHeight: 200,
     resizeMode: 'contain',
   }
 });
