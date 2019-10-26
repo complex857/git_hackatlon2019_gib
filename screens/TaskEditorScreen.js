@@ -138,7 +138,7 @@ export default class TaskEditorScreen extends Component {
       <View style={styles.container}>
         <Text>Diddit Editor</Text>
         <Text>Title:</Text>
-        <TextInputField innerText="Text" fieldName={"title"} value={this.state.taskAtHand.title} saveStateFunc={this.theBetterSetState}/>
+        <TextInputField innerText="Text" fieldName={"name"} value={this.state.taskAtHand.title} saveStateFunc={this.theBetterSetState}/>
         <Text>Description:</Text>
         <TextInputField innerText="Text" fieldName="description" value={this.state.taskAtHand.description} saveStateFunc={this.theBetterSetState}/>
         <Text>Difficulty:</Text>

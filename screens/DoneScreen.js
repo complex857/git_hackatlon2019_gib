@@ -5,6 +5,8 @@ import { Rating, AirbnbRating } from 'react-native-elements';
 import AsyncStorage from "@callstack/async-storage";
 import { MonoText } from '../components/StyledText';
 import defaultTasks from '../assets/jsons/diddits-base';
+import CustomHeader from '../components/CustomHeader';
+import commonStyles from '../styles/Common';
 
 export default class DoneScreen extends Component {
 
@@ -43,21 +45,21 @@ export default class DoneScreen extends Component {
     }
 
     return (
-      <View style={styles.container}>
-        <Text style={styles.h1}>Congratulations, you have done a diddit!</Text>
-        <Text style={styles.p}>
+      <View style={commonStyles.container}>
+        <Text style={commonStyles.h1}>Congratulations, you have done a diddit!</Text>
+        <Text style={commonStyles.p}>
           You have earned <Text style={{fontWeight: 'bold'}}>{task.points}</Text> more points!
         </Text>
 
-        <Text style={styles.p}>
+        <Text style={commonStyles.h1}>
           How much did you like it?
         </Text>
 
-        <View style={styles.p}>
+        <View style={commonStyles.p}>
           <AirbnbRating
             showRating={false}
             count={3}
-            defaultRating={2}
+            defaultRating={0}
             size={40}
             onFinishRating={this.onRating}
           />
@@ -69,20 +71,7 @@ export default class DoneScreen extends Component {
 }
 
 DoneScreen.navigationOptions = {
-  header: null,
+  header: props => <CustomHeader {...props} />
 };
 
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  h1: {
-   margin: 10,
-   fontSize: 16,
-   fontWeight: 'bold'
-  },
-});

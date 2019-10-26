@@ -1,8 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import AsyncStorage from "@callstack/async-storage";
-import { StyleSheet, Text, View, SafeAreaView, SectionList, } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, SectionList, ScrollView } from 'react-native';
 import { withNavigationFocus } from 'react-navigation';
+import CustomHeader from '../components/CustomHeader';
 import defaultTasks from '../assets/jsons/diddits-base';
+import commonStyles from '../styles/Common';
 
 const findTask = (name, tasks) => {
   return tasks.find(task => task.name === name);
@@ -58,7 +60,7 @@ class SettingsScreen extends Component {
       return acc;
     }, 0);
     return (
-      <Text style={styles.p}>
+      <Text style={commonStyles.p}>
         The total points you earned: <Text style={{fontWeight: 'bold'}}>{totalPoints}</Text>
       </Text>
     );
@@ -66,7 +68,9 @@ class SettingsScreen extends Component {
 
   noTasksDone() {
     return (
-      <Text style={styles.h1}>You haven't done any tasks yet</Text>
+      <View style={commonStyles.container}>
+        <Text style={commonStyles.h1}>You haven't done any tasks yet</Text>
+      </View>
     );
   }
 
@@ -80,7 +84,7 @@ class SettingsScreen extends Component {
         keyExtractor={(item, index) => item + index}
         renderItem={props => <Item {...props} tasks={this.state.tasks} />}
         renderSectionHeader={({ section: { title } }) => (
-          <Text style={styles.h1}>{title}</Text>
+          <Text style={commonStyles.h1}>{title}</Text>
         )}
       />
     );
@@ -92,43 +96,31 @@ class SettingsScreen extends Component {
     }
 
     return (
-      <View style={styles.contentContainer}>
-        <SafeAreaView style={styles.container}>
+      <SafeAreaView style={commonStyles.container}>
+        <ScrollView style={commonStyles.contentContainer}>
           {this.totalPoints()}
-          {this.state.tasksDone.length === 0 && this.noTasksDone() }
-        </SafeAreaView>
-      </View>
+          {this.state.tasksDone.length === 0 ? this.noTasksDone() : this.tasksDone() }
+        </ScrollView>
+      </SafeAreaView>
     );
   }
 }
 
 SettingsScreen.navigationOptions = {
-  title: 'Profile page',
+  header: (props) => <CustomHeader title="Dashboard" {...props} />
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  contentContainer: {
-    paddingTop: 30,
-  },
-  p: {
-    margin: 10,
-  },
-  h1: {
-   margin: 10,
-   fontSize: 16,
-   fontWeight: 'bold'
-  },
   item: {
-    backgroundColor: '#f9c2ff',
-    padding: 20,
+    flex: 1,
+    borderColor: '#a6b1e1',
+    padding: 15,
     marginVertical: 8,
+    borderWidth: 1,
+    borderRadius: 15,
   },
+  title: {
+  }
 });
 
 export default withNavigationFocus(SettingsScreen);
