@@ -5,6 +5,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import ProgressScreen from '../screens/ProgressScreen';
+import TaskEditorScreen from '../screens/TaskEditorScreen';
 import DoneScreen from '../screens/DoneScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
@@ -19,6 +20,7 @@ const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
     Progress: ProgressScreen,
+    Editor: TaskEditorScreen,
     Done: DoneScreen,
   },
   config
