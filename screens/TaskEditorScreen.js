@@ -1,9 +1,11 @@
 import * as WebBrowser from 'expo-web-browser';
 import React, { useState, Component } from 'react';
-import { Image, Modal, ScrollView, StyleSheet, Text, Alert, TouchableOpacity, View, Button, TouchableHighlight, TextInput } from 'react-native';
+import { Image, Modal, ScrollView, StyleSheet, Text, Alert, TouchableOpacity, View, Button, TouchableHighlight, TextInput} from 'react-native';
 import { MonoText } from '../components/StyledText';
 import defaultTasks from '../assets/jsons/diddits-base';
 import AsyncStorage from "@callstack/async-storage";
+
+import { Rating, AirbnbRating, CheckBox} from 'react-native-elements';
 
 export default class TaskEditorScreen extends Component {
 
@@ -12,7 +14,7 @@ export default class TaskEditorScreen extends Component {
 
     this.state = {
       taskId: this.props.taskId ? this.props.taskId : "new",
-      taskAtHand: {},
+      taskAtHand: {difficulty: 2, public: false},
       modalVisible: false,
       tasks: [],
     }
@@ -39,6 +41,14 @@ export default class TaskEditorScreen extends Component {
 
   }
 
+  ratingCompleted = (rating) => {
+    this.setState(() => (
+      {taskAtHand: {
+        ...this.state.taskAtHand,
+        difficulty: rating
+      }})
+    );
+  }
 
   theBetterSetState = (fieldName, value) => {
     this.setState(() => (
@@ -48,6 +58,16 @@ export default class TaskEditorScreen extends Component {
       }})
     );
     console.log(fieldName + "saved name state to " + value);
+  }
+
+  updateCheckbox = () => {
+    console.log("Swapping");
+    this.setState(() => (
+      {taskAtHand: {
+        ...this.state.taskAtHand,
+        public: !this.state.taskAtHand.public
+      }})
+    );
   }
 
   setModalVisible = async (value) => {
@@ -74,6 +94,8 @@ export default class TaskEditorScreen extends Component {
       console.log(newTasks);
       await AsyncStorage.setItem("tasks", JSON.stringify(newTasks));
       console.log("Save Complete");
+
+      this.props.navigation.push('Home', {});
 
       //console.log("Saving");
       //this.saveTasks();
@@ -120,9 +142,22 @@ export default class TaskEditorScreen extends Component {
         <Text>Description:</Text>
         <TextInputField innerText="Text" fieldName="description" value={this.state.taskAtHand.description} saveStateFunc={this.theBetterSetState}/>
         <Text>Difficulty:</Text>
-        <TextInputField innerText="Text" fieldName="rank" value={this.state.taskAtHand.rank} saveStateFunc={this.theBetterSetState}/>
-        <Text>Public or Nah?</Text>
-        <TextInputField innerText="Text" fieldName="public" value={this.state.taskAtHand.public} saveStateFunc={this.theBetterSetState}/>
+
+        <AirbnbRating
+          count={3}
+          reviews={["Easy (<15 mins)", "Meh (>15 || <45 mins)", "Why did I sign up for this? (>45 mins)"]}
+          defaultRating={this.state.taskAtHand.difficulty}
+          size={20}
+          onFinishRating={this.ratingCompleted}
+        />
+
+        <CheckBox
+          right
+          title='Share with friends?'
+          checked={this.state.taskAtHand.public}
+          onPress={this.updateCheckbox}
+        />
+
         <Text>Location:</Text>
         <TextInputField innerText="Text" fieldName="location" value={this.state.taskAtHand.location} saveStateFunc={this.theBetterSetState}/>
         <Text>Time / Reocurrence:</Text>
