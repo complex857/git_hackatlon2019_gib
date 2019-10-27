@@ -98,7 +98,7 @@ class HomeScreen extends Component {
         )}
         {!this.state.modalVisible && (
           <ScrollView>
-            <Text style={{textAlign: 'center', margin: 10, fontSize: 22, fontWeight: 'bold'}}>Let's get started, pick a task!</Text>
+            <Text style={{textAlign: 'center', margin: 10, fontSize: 22, fontWeight: 'bold'}}>Let's get started, pick a Diddit! to do!</Text>
             { shuffle(defaultTasks).slice(0, 3).map((task, i) => (
               <View key={`task-${i}`} style={styles.buttonContainer} >
                 <Button title={task.name} onPress={() => navigation.push('Progress', {task: task.name}) } />
