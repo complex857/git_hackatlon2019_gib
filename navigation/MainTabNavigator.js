@@ -33,7 +33,8 @@ const HomeStack = createStackNavigator(
 HomeStack.navigationOptions = {
   tabBarLabel: 'Diddit!',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
+    <Image 
+      ource={require('../assets/images/diddit.png')} />
       focused={focused}
       name={
         Platform.OS === 'ios'

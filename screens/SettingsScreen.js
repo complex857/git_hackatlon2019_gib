@@ -38,7 +38,7 @@ class SettingsScreen extends Component {
   }
 
   nextLevelXp = (level) => {
-    return (3 * (level ^ 5)) / 4;
+    return Math.round((4 * (Math.pow(level, 3))) / 5);
   }
 
   fetchData = () => {
@@ -51,7 +51,9 @@ class SettingsScreen extends Component {
         this.setState({ level })
 
         const checkLevelUp = () => {
-          while (this.totalPointsValue() > this.nextLevelXp(level)) {
+          let pointsTotal = 0;
+          while (this.totalPointsValue() - pointsTotal > this.nextLevelXp(level)) {
+            pointsTotal += this.nextLevelXp(level);
             level++
             this.setState({level: level })
             AsyncStorage.setItem("level", level);
@@ -85,9 +87,12 @@ class SettingsScreen extends Component {
 
   totalPoints() {
     return (
-      <Text style={commonStyles.p}>
-        The total points you earned: <Text style={{fontWeight: 'bold'}}>{this.totalPointsValue()}</Text>
-      </Text>
+      <Fragment>
+        <Text style={commonStyles.p}>
+          <Text>The total points you earned: <Text style={{fontWeight: 'bold'}}>{this.totalPointsValue()}</Text></Text>
+        </Text>
+        <Text>Your current level is: <Text style={{fontWeight: 'bold'}}>{this.state.level}</Text></Text>
+      </Fragment>
     );
   }
 
@@ -123,8 +128,7 @@ class SettingsScreen extends Component {
     const percent = ((this.totalPointsValue()) / this.nextLevelXp(this.state.level) ) * 100;
 
     return (
-      <SafeAreaView style={commonStyles.container}>
-
+      <View style={commonStyles.container}>
         <View style={{width: 320, height: 50, paddingTop: 30}}>
           <ProgressBar percent={percent} fillBackground="#d0e562">
             <Step transition="scale">
@@ -148,11 +152,12 @@ class SettingsScreen extends Component {
         </ProgressBar>
         </View>
 
+        {this.totalPoints()}
+
         <ScrollView style={commonStyles.contentContainer}>
-          {this.totalPoints()}
           {this.state.tasksDone.length === 0 ? this.noTasksDone() : this.tasksDone() }
         </ScrollView>
-      </SafeAreaView>
+      </View>
     );
   }
 }
