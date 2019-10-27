@@ -4,6 +4,7 @@ import { Image, Slider, Modal, ScrollView, StyleSheet, Text, Alert, TouchableOpa
 import { MonoText } from '../components/StyledText';
 import defaultTasks from '../assets/jsons/diddits-base';
 import { AsyncStorage } from 'react-native';
+import commonStyles from '../styles/Common';
 
 import { Rating, AirbnbRating, CheckBox} from 'react-native-elements';
 

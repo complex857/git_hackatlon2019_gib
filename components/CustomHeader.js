@@ -9,7 +9,7 @@ export default (props) => {
     <Header
       placement="center"
       centerComponent={
-        <Image style={{margin: 10, width: 188, height: 68}} source={require('../assets/images/logo.png')} />
+        <Image style={{margin: 10, width: 242, height: 60}} source={require('../assets/images/logo.png')} />
       }
       containerStyle={commonStyles.header}
 
