@@ -152,14 +152,14 @@ export default class TaskEditorScreen extends Component {
           <Text style={commonStyles.myLabel}>Difficulty:</Text>
           <AirbnbRating
             count={3}
-            reviews={["Easy (<15 mins)", "Meh (>15 || <45 mins)", "Why did I sign up for this? (>45 mins)"]}
+            reviews={["Easy", "Meh", "Why did I sign up for this?"]}
             defaultRating={this.state.taskAtHand.difficulty}
             size={40}
             onFinishRating={this.ratingCompleted}
           />
 
           <CheckBox
-            title='Share with friends?'
+            title='Share with community'
             checked={this.state.taskAtHand.public}
             onPress={this.updateCheckbox}
           />
@@ -186,7 +186,7 @@ export default class TaskEditorScreen extends Component {
             </View>
           </View>
 
-          <Button title="save" onPress={this.saveIt} />
+          <Button style={styles.funkyButton} title="save" onPress={this.saveIt} />
 
         </View>
 
