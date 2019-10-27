@@ -98,7 +98,7 @@ export default class ProgressScreen extends Component {
       <View style={{...commonStyles.container, margin: 30}}>
         {this.taskDetails(task)}
         <View style={styles.buttonContainer} >
-          <Button title="I'm Done!" onPress={() => this.setFinished(true) } />
+          <Button title="Diddit!" onPress={() => this.setFinished(true) } />
         </View>
         <View style={styles.buttonContainer} >
           <GrayButton title="Changed My Mind" onPress={() => this.onCancel()} />

@@ -20,8 +20,6 @@ export default class TaskEditorScreen extends Component {
     }
   }
 
-
-
   componentWillMount() {
 
     if (this.props.taskId != "new" || this.props.taskId != null) {
