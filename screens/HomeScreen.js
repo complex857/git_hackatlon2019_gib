@@ -32,7 +32,7 @@ class HomeScreen extends Component {
 
   fetchData = () => {
     AsyncStorage.getItem("tasks").then(tasks => {
-      tasks = JSON.parse(tasks || '[]');
+      tasks = JSON.parse(tasks || '[]').filter(t => !t.hidden);
       this.setState(() => ({
         tasks: tasks
       }))

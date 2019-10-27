@@ -15,13 +15,15 @@ export default class DoneScreen extends Component {
     super(props);
     this.state = {
       task: null,
+      tasks: [],
     }
   }
 
   componentWillMount() {
     AsyncStorage.getItem("tasks").then(tasks => {
-      const task = [...defaultTasks, ...JSON.parse(tasks || '[]')].find((task) => task.name === this.props.navigation.getParam('task'))
-      this.setState(() => ({ task }))
+      tasks = JSON.parse(tasks || '[]');
+      const task = [...defaultTasks, ...tasks].find((task) => task.name === this.props.navigation.getParam('task'))
+      this.setState(() => ({ task, tasks }))
     });
   }
 
@@ -45,6 +47,8 @@ export default class DoneScreen extends Component {
       return null;
     }
 
+    const ownTask = this.state.tasks.find((t) => t.name === this.state.task.name)
+
     return (
       <View style={commonStyles.contentContainer}>
       <View style={commonStyles.container}>
@@ -67,9 +71,25 @@ export default class DoneScreen extends Component {
             onFinishRating={this.onRating}
           />
         </View>
-        <View style={styles.buttonContainer} >
-        <Button title="Let's do an another one!" onPress={() =>  this.props.navigation.navigate('Home')}  />
-        </View>
+        { !ownTask &&
+          <View style={styles.buttonContainer} >
+            <Button title="Let's do an another one!" onPress={() =>  this.props.navigation.navigate('Home')}  />
+          </View>
+        }
+        { ownTask &&
+          <View style={styles.buttonContainer} >
+            <Button title="Keep this Diddit" onPress={() =>  this.props.navigation.navigate('Home')}  />
+            <GrayButton title="Remove" onPress={() => {
+              this.state.tasks.forEach((t) => {
+                if (this.state.task.name === t.name) {
+                  t.hidden = true
+                }
+              });
+              AsyncStorage.setItem("tasks", JSON.stringify(this.state.tasks));
+              this.props.navigation.navigate('Home');
+            }}  />
+          </View>
+        }
       </View>
     );
   }
