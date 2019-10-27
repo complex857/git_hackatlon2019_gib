@@ -117,7 +117,7 @@ class HomeScreen extends Component {
             <View style={commonStyles.p}>
               <Text style={{textAlign: 'center', margin: 10, fontSize: 16, fontWeight: 'bold'}}>Don't like these? Add your own</Text>
               <View style={styles.buttonContainer} >
-                <OrangeButton title="Add a Task" onPress={() => navigation.push('Editor', {task: null}) } />
+                <OrangeButton title="Create a new Diddit!" onPress={() => navigation.push('Editor', {task: null}) } />
               </View>
             </View>
           </ScrollView>
