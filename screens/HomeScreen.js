@@ -71,22 +71,20 @@ class HomeScreen extends Component {
           <View style={{marginTop: 22}}>
             <Modal style={styles.popup} presentationStyle="overFullScreen" animationType="slide" transparent={false} visible={this.state.modalVisible} onRequestClose={() => { this.setModalVisible(false); }}>
               <View style={{marginTop: 22}}>
-                <Text style={commonStyles.h1}>Hi There!</Text>
+                <Text style={commonStyles.h1}>Ready to change how you attack your goals? </Text>
                 <View style={commonStyles.p}>
-                  <Text>Have this ever happened to you...</Text>
-                  <Text>You wake up and have a hard time to decide why would you get out of bed?</Text>
-                  <Text>There are things to do around the house, but can't decide what to get started on?</Text>
-                  <Text>Your days lack structure or routine?</Text>
+                  <Text> 1.	Add diddits </Text>
+                  <Text> Big or small – it doesn’t matter. You define the difficulty level. Alternatively, choose from a suggested diddit or community diddit.  </Text>
                 </View>
 
                 <View style={commonStyles.p}>
-                  <Text>We are here to help!</Text>
-                  <Text>This app will recommend you some basic things that you can get started on right away. Just pick one of the presets (you can edit these later, don't worry). And get crackin!</Text>
-                  <Text>Every accomplismeht will be recognised and rememberd forever by us. You just tell us how it went and once you've a few of these we'll help you put together a schedule of them</Text>
+                  <Text> 2.  Choose rewards </Text>
+                  <Text> Choose up to three rewards you will give to yourself when you have completed some of your diddits. They can be something small like getting ice cream or something bigger like a holiday – it’s up to you!  </Text>
                 </View>
 
                 <View style={commonStyles.p}>
-                  <Text>Sounds good? Good!</Text>
+                  <Text>3.	Get it done</Text>
+                  <Text>As you complete diddits, we will remind you to reward yourself! diddit is more than a to-do list. It’s a way to change your perception of tasks and reward yourself for a job well done. Too often we don’t recognise our own achievements, so diddit is here to help.</Text>
                 </View>
 
                 <View style={styles.dismissBtn}>
