@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import AsyncStorage from "@callstack/async-storage";
+import { AsyncStorage } from 'react-native';
 import { StyleSheet, Text, View, SafeAreaView, SectionList, ScrollView } from 'react-native';
 import { withNavigationFocus } from 'react-navigation';
 import CustomHeader from '../components/CustomHeader';

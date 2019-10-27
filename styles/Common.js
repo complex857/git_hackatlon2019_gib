@@ -13,6 +13,8 @@ export default StyleSheet.create({
   },
   contentContainer: {
     paddingTop: 30,
+    flex: 1,
+    backgroundColor: '#fff8e8',
   },
   p: {
     margin: 10,

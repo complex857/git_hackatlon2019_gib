@@ -5,7 +5,7 @@ import { withNavigationFocus } from 'react-navigation';
 import CustomHeader from '../components/CustomHeader';
 import { Button, OrangeButton } from '../components/Button';
 import defaultTasks from '../assets/jsons/diddits-base';
-import AsyncStorage from "@callstack/async-storage";
+import { AsyncStorage } from 'react-native';
 import commonStyles from '../styles/Common';
 
 function shuffle(a) {
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 30,
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
-    borderColor: '#doe562',
+    borderColor: '#d0e562',
   }
 });
 
