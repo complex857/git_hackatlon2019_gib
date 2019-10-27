@@ -3,7 +3,7 @@ import React, { useState, Component } from 'react';
 import { Image, Slider, Modal, ScrollView, StyleSheet, Text, Alert, TouchableOpacity, View, Button, TouchableHighlight, TextInput, Divider} from 'react-native';
 import { MonoText } from '../components/StyledText';
 import defaultTasks from '../assets/jsons/diddits-base';
-import AsyncStorage from "@callstack/async-storage";
+import { AsyncStorage } from 'react-native';
 
 import { Rating, AirbnbRating, CheckBox} from 'react-native-elements';
 

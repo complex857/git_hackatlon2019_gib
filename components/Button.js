@@ -41,4 +41,21 @@ export const OrangeButton = (props) => {
   );
 };
 
+export const GrayButton = (props) => {
+  return (
+    <Btn
+      type="outline"
+      buttonStyle={{
+        // backgroundColor: '#e88e33',
+        borderWidth: 0,
+        borderRadius: 15,
+      }}
+      titleStyle={{
+        color: 'black'
+      }}
+      {...props}
+    />
+  );
+};
+
 export default Button;

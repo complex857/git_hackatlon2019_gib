@@ -4,7 +4,7 @@ import { Image, ActivityIndicator, ScrollView, StyleSheet, Text, Alert, Touchabl
 import AsyncStorage from "@callstack/async-storage";
 import { MonoText } from '../components/StyledText';
 import defaultTasks from '../assets/jsons/diddits-base';
-import { Button, OrangeButton } from '../components/Button';
+import { Button, OrangeButton, GrayButton } from '../components/Button';
 import CustomHeader from '../components/CustomHeader';
 import commonStyles from '../styles/Common';
 
@@ -38,6 +38,11 @@ export default class ProgressScreen extends Component {
   setStarted = (value) => {
     this.setState({started: value})
     AsyncStorage.setItem("current_task", this.state.task.name);
+  }
+
+  onCancel = () => {
+    AsyncStorage.setItem("current_task", '')
+    this.props.navigation.navigate('Home');
   }
 
   setFinished = async (value) => {
@@ -81,6 +86,9 @@ export default class ProgressScreen extends Component {
         <View style={styles.buttonContainer} >
           <Button title="Start" onPress={() => this.setStarted(true) } />
         </View>
+        <View style={styles.buttonContainer} >
+          <GrayButton title="Back" onPress={() => this.props.navigation.navigate('Home') } />
+        </View>
       </View>
     );
   }
@@ -90,7 +98,10 @@ export default class ProgressScreen extends Component {
       <View style={{...commonStyles.container, margin: 30}}>
         {this.taskDetails(task)}
         <View style={styles.buttonContainer} >
-          <Button title="I'am Done" onPress={() => this.setFinished(true) } />
+          <Button title="I'm Done!" onPress={() => this.setFinished(true) } />
+        </View>
+        <View style={styles.buttonContainer} >
+          <GrayButton title="Changed My Mind" onPress={() => this.onCancel()} />
         </View>
       </View>
     );
