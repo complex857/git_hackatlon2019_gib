@@ -47,10 +47,12 @@ export default class DoneScreen extends Component {
 
     return (
       <View style={commonStyles.contentContainer}>
-        <Text style={commonStyles.h1}>Congratulations, you have done a diddit!</Text>
-        <Text style={commonStyles.p}>
+      <View style={commonStyles.container}>
+          <Text style={commonStyles.h1}>Congratulations, you have done a diddit!</Text>
+          <Text style={commonStyles.p}>
           You have earned <Text style={{fontWeight: 'bold'}}>{task.points}</Text> more points!
-        </Text>
+          </Text>
+      </View>
 
         <Text style={commonStyles.h1}>
           How much did you like it?

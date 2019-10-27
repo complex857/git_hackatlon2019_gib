@@ -8,7 +8,7 @@ import ProgressScreen from '../screens/ProgressScreen';
 import TaskEditorScreen from '../screens/TaskEditorScreen';
 import DoneScreen from '../screens/DoneScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-
+import RewardsScreen from '../screens/RewardsScreen';
 
 const config = Platform.select({
   web: {
@@ -43,8 +43,27 @@ HomeStack.navigationOptions = {
     />
   ),
 };
-
 HomeStack.path = '';
+
+const RewardsStack = createStackNavigator(
+  {
+    Rewards: RewardsScreen,
+  },
+  config
+);
+
+RewardsStack.navigationOptions = {
+  tabBarLabel: 'Rewards',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={
+        Platform.OS === 'ios' ? 'ios-tropy' : 'md-trophy'
+      }
+    />
+  ),
+};
+RewardsStack.path = '';
 
 const SettingsStack = createStackNavigator(
   {
@@ -64,6 +83,7 @@ SettingsStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
+  RewardsStack,
   SettingsStack,
 });
 
