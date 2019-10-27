@@ -1,6 +1,6 @@
 import * as WebBrowser from 'expo-web-browser';
 import React, { useState, Component } from 'react';
-import { Image, Modal, ScrollView, StyleSheet, Text, Alert, TouchableOpacity, View, Button, TouchableHighlight, TextInput} from 'react-native';
+import { Image, Slider, Modal, ScrollView, StyleSheet, Text, Alert, TouchableOpacity, View, Button, TouchableHighlight, TextInput, Divider} from 'react-native';
 import { MonoText } from '../components/StyledText';
 import defaultTasks from '../assets/jsons/diddits-base';
 import AsyncStorage from "@callstack/async-storage";
@@ -135,13 +135,16 @@ export default class TaskEditorScreen extends Component {
     console.log(tasks);
 
     return (
-      <View style={styles.container}>
+      <View className="taskEditor mainContainer">
         <Text>Diddit Editor</Text>
-        <Text>Title:</Text>
-        <TextInputField innerText="Text" fieldName={"title"} value={this.state.taskAtHand.title} saveStateFunc={this.theBetterSetState}/>
-        <Text>Description:</Text>
-        <TextInputField innerText="Text" fieldName="description" value={this.state.taskAtHand.description} saveStateFunc={this.theBetterSetState}/>
-        <Text>Difficulty:</Text>
+
+        <View className="container">
+          <Text>Title:</Text>
+          <TextInputField innerText="Text" fieldName={"title"} value={this.state.taskAtHand.title} saveStateFunc={this.theBetterSetState}/>
+          <Text>Description:</Text>
+          <TextInputField innerText="Text" fieldName="description" value={this.state.taskAtHand.description} saveStateFunc={this.theBetterSetState}/>
+          <Text>Difficulty:</Text>
+        </View>
 
         <AirbnbRating
           count={3}
@@ -157,13 +160,24 @@ export default class TaskEditorScreen extends Component {
           checked={this.state.taskAtHand.public}
           onPress={this.updateCheckbox}
         />
+        <View style={{ width:"100px", height:"200px", alignItems: 'stretch', justifyContent: 'center' }}>
+          <Slider
+            value={this.state.value}
+            onValueChange={value => this.setState({ value })}
+          />
+          <Text>Value: {this.state.value}</Text>
+        </View>
 
-        <Text>Location:</Text>
-        <TextInputField innerText="Text" fieldName="location" value={this.state.taskAtHand.location} saveStateFunc={this.theBetterSetState}/>
-        <Text>Time / Reocurrence:</Text>
-        <TextInputField innerText="Text" fieldName="time" value={this.state.taskAtHand.time} saveStateFunc={this.theBetterSetState}/>
-        <Text>Tags:</Text>
-        <TextInputField innerText="Text" fieldName="tags" value={this.state.taskAtHand.tags} saveStateFunc={this.theBetterSetState}/>
+        <View className="advanced">
+
+          <Text className="title">Time / Reocurrence:</Text>
+          <TextInputField innerText="Text" fieldName="time" value={this.state.taskAtHand.time} saveStateFunc={this.theBetterSetState}/>
+          <Text className="title">Location:</Text>
+          <TextInputField innerText="Text" fieldName="location" value={this.state.taskAtHand.location} saveStateFunc={this.theBetterSetState}/>
+          <Text className="title">Tags:</Text>
+          <TextInputField innerText="Text" fieldName="tags" value={this.state.taskAtHand.tags} saveStateFunc={this.theBetterSetState}/>
+        </View>
+
         <Button title="save" onPress={this.saveIt} />
       </View>
     );
@@ -187,19 +201,19 @@ const TextInputField = (props) => {
 
 
 const styles = StyleSheet.create({
+  mainContainer:{
+    display: "flex",
+    width: 100,
+    height: 100,
+    backgroundColor: 'blue',
+  },
   container: {
-    flex: 1,
     backgroundColor: '#fff',
     justifyContent: "center",
     alignItems: "center",
   },
   contentContainer: {
     paddingTop: 30,
-  },
-  buttonContainer: {
-    flex: '1 1 auto',
-    display: 'flex',
-    margin: 10,
   },
   p: {
     margin: 10,
