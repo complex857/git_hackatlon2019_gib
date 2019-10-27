@@ -148,6 +148,8 @@ export default class RewardsScreen extends Component {
             <TextInputField className="textField" placeholder="Description" innerText="Text" fieldName="description" value={this.state.taskAtHand.description} saveStateFunc={this.theBetterSetState}/>
           </View>
 
+                    <br />
+
           <Text style={commonStyles.myLabel}>What difficulty should you receive this reward?</Text>
           <AirbnbRating
             count={3}
@@ -156,6 +158,9 @@ export default class RewardsScreen extends Component {
             size={40}
             onFinishRating={this.ratingCompleted}
           />
+
+                    <br />
+                              <br />
 
           <Button title="save" onPress={this.saveIt} />
 

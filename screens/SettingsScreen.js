@@ -3,6 +3,7 @@ import { AsyncStorage } from 'react-native';
 import { StyleSheet, Text, View, SafeAreaView, SectionList, ScrollView } from 'react-native';
 import { withNavigationFocus } from 'react-navigation';
 import "react-step-progress-bar/styles.css";
+import { Avatar } from 'react-native-elements';
 import { ProgressBar, Step } from "react-step-progress-bar";
 import CustomHeader from '../components/CustomHeader';
 import defaultTasks from '../assets/jsons/diddits-base';
@@ -129,6 +130,16 @@ class SettingsScreen extends Component {
 
     return (
       <View style={commonStyles.container}>
+
+      <View>
+        <br/>
+        <Avatar
+          rounded
+          size="xlarge"
+          source={{ uri: 'https://risibank.fr/cache/stickers/d794/79433-full.png', }}
+        />
+      </View>
+
         <View style={{width: 320, height: 50, paddingTop: 30}}>
           <ProgressBar percent={percent} fillBackground="#d0e562">
             <Step transition="scale">
@@ -180,4 +191,3 @@ const styles = StyleSheet.create({
 });
 
 export default withNavigationFocus(SettingsScreen);
-
