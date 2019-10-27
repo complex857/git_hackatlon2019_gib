@@ -147,7 +147,6 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
     borderColor: '#doe562',
-
   }
 });
 

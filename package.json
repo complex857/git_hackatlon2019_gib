@@ -16,6 +16,7 @@
     "@expo/samples": "~3.0.3",
     "@expo/vector-icons": "^10.0.3",
     "@react-native-community/async-storage": "^1.6.2",
+    "@react-native-community/datetimepicker": "^2.1.0",
     "@react-navigation/web": "^1.0.0-alpha.9",
     "babel-preset-es2015": "^6.24.1",
     "expo": "^35.0.0",
@@ -30,6 +31,7 @@
     "react-native-elements": "^1.2.6",
     "react-native-gesture-handler": "~1.3.0",
     "react-native-hooks-persist": "^1.0.3",
+    "react-native-modal-datetime-picker": "^7.6.0",
     "react-native-web": "^0.11.7",
     "react-navigation": "^3.12.0"
   },

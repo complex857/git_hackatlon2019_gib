@@ -26,5 +26,10 @@ export default StyleSheet.create({
   btn: {
     backgroundColor: '#424874',
     color: '#fff'
+  },
+  myLabel : {
+    color: "#cdda68",
+    fontSize: "18px",
+    fontWeight: "bold"
   }
 });
