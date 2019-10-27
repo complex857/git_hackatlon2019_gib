@@ -17,7 +17,7 @@ export default class TaskEditorScreen extends Component {
 
     this.state = {
       taskId: this.props.taskId ? this.props.taskId : "new",
-      taskAtHand: {difficulty: 2, public: false},
+      taskAtHand: {difficulty: 2, public: false, time: new Date().toLocaleString(), location: "Somewhere"},
       modalVisible: false,
       tasks: [],
       advancedShow: false,
@@ -172,11 +172,20 @@ export default class TaskEditorScreen extends Component {
           <View className={"advancedSection show"+this.state.advancedShow}>
 
             <Text style={commonStyles.myLabel} className="title">Time / Reocurrence:</Text>
+            <View className="doubleField">
             <TextInputField style={commonStyles.myTextFields} innerText="Text" fieldName="time" value={this.state.taskAtHand.time} saveStateFunc={this.theBetterSetState}/>
+            <Button className="funkyButton" title="Select" onPress={this.saveIt} />
+            </View>
             <Text style={commonStyles.myLabel} className="title">Location:</Text>
+            <View className="doubleField">
             <TextInputField style={commonStyles.myTextFields} innerText="Text" fieldName="location" value={this.state.taskAtHand.location} saveStateFunc={this.theBetterSetState}/>
+            <Button className="funkyButton" title="Select" onPress={this.saveIt} />
+            </View>
             <Text style={commonStyles.myLabel} className="title">Tags:</Text>
+            <View className="doubleField">
             <TextInputField style={commonStyles.myTextFields} innerText="Text" fieldName="tags" value={this.state.taskAtHand.tags} saveStateFunc={this.theBetterSetState}/>
+            <Button style={styles.funkyButton} title="Select" onPress={this.saveIt} />
+            </View>
           </View>
 
           <Button title="save" onPress={this.saveIt} />
@@ -226,5 +235,8 @@ const styles = StyleSheet.create({
   },
   dismissBtn: {
     textAlign: 'center'
+  },
+  funkyButton: {
+    background: "green!important",
   }
 });

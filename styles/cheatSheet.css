@@ -15,7 +15,7 @@ html, body, #root {
 }
 
 * {
-  font-family: 'Quicksand', sans-serif!important;
+  /*font-family: 'Quicksand', sans-serif!important;*/
 }
 
 .advancedArea {
@@ -68,4 +68,21 @@ html, body, #root {
 
 .advancedSection {
   margin: 10px;
+}
+
+.doubleField {
+  display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.doubleField input {
+  flex-grow: 2;
+}
+
+.funkyButton {
+  border-radius: 10px;
+  background: #8f9847;
+  height: 52px;
+  padding: 9px;
 }
