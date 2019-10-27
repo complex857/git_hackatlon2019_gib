@@ -17,6 +17,9 @@ export default class TaskEditorScreen extends Component {
       taskAtHand: {difficulty: 2, public: false},
       modalVisible: false,
       tasks: [],
+      date: new Date('2020-06-12T14:42:42'),
+      mode: 'date',
+      show: false,
     }
   }
 
@@ -40,6 +43,30 @@ export default class TaskEditorScreen extends Component {
     }
 
   }
+
+  setDate = (event, date) => {
+      date = date || this.state.date;
+
+      this.setState({
+        show: Platform.OS === 'ios' ? true : false,
+        date,
+      });
+    }
+
+    show = mode => {
+      this.setState({
+        show: true,
+        mode,
+      });
+    }
+
+    datepicker = () => {
+      this.show('date');
+    }
+
+    timepicker = () => {
+      this.show('time');
+    }
 
   ratingCompleted = (rating) => {
     this.setState(() => (
@@ -135,17 +162,19 @@ export default class TaskEditorScreen extends Component {
     console.log(tasks);
 
     return (
-      <View className="taskEditor mainContainer">
+      <View className="taskEditor mainContainer" style={styles.mainContainer}>
         <Text>Diddit Editor</Text>
 
         <View className="container">
-          <Text>Title:</Text>
-          <TextInputField innerText="Text" fieldName={"name"} value={this.state.taskAtHand.title} saveStateFunc={this.theBetterSetState}/>
-          <Text>Description:</Text>
-          <TextInputField innerText="Text" fieldName="description" value={this.state.taskAtHand.description} saveStateFunc={this.theBetterSetState}/>
-          <Text>Difficulty:</Text>
+          <Text style={commonStyles.myLabel}>Title:</Text>
+          <TextInputField style={commonStyles.myTextFields} helperText="Some important text" placeholder="Title" innerText="Text" fieldName={"name"} value={this.state.taskAtHand.title} saveStateFunc={this.theBetterSetState} />
+          <Text style={commonStyles.myLabel}>Description:</Text>
+          <TextInputField className="textField" placeholder="Description" innerText="Text" fieldName="description" value={this.state.taskAtHand.description} saveStateFunc={this.theBetterSetState}/>
+
         </View>
 
+
+        <Text style={commonStyles.myLabel}>Difficulty:</Text>
         <AirbnbRating
           count={3}
           reviews={["Easy (<15 mins)", "Meh (>15 || <45 mins)", "Why did I sign up for this? (>45 mins)"]}
@@ -155,27 +184,21 @@ export default class TaskEditorScreen extends Component {
         />
 
         <CheckBox
-          right
           title='Share with friends?'
           checked={this.state.taskAtHand.public}
           onPress={this.updateCheckbox}
         />
-        <View style={{ width:"100px", height:"200px", alignItems: 'stretch', justifyContent: 'center' }}>
-          <Slider
-            value={this.state.value}
-            onValueChange={value => this.setState({ value })}
-          />
-          <Text>Value: {this.state.value}</Text>
-        </View>
 
+
+        <Text style={commonStyles.myLabel} className="advancedArea">Advanced:</Text>
         <View className="advanced">
 
-          <Text className="title">Time / Reocurrence:</Text>
-          <TextInputField innerText="Text" fieldName="time" value={this.state.taskAtHand.time} saveStateFunc={this.theBetterSetState}/>
-          <Text className="title">Location:</Text>
-          <TextInputField innerText="Text" fieldName="location" value={this.state.taskAtHand.location} saveStateFunc={this.theBetterSetState}/>
-          <Text className="title">Tags:</Text>
-          <TextInputField innerText="Text" fieldName="tags" value={this.state.taskAtHand.tags} saveStateFunc={this.theBetterSetState}/>
+          <Text style={commonStyles.myLabel} className="title">Time / Reocurrence:</Text>
+          <TextInputField style={commonStyles.myTextFields} innerText="Text" fieldName="time" value={this.state.taskAtHand.time} saveStateFunc={this.theBetterSetState}/>
+          <Text style={commonStyles.myLabel} className="title">Location:</Text>
+          <TextInputField style={commonStyles.myTextFields} innerText="Text" fieldName="location" value={this.state.taskAtHand.location} saveStateFunc={this.theBetterSetState}/>
+          <Text style={commonStyles.myLabel} className="title">Tags:</Text>
+          <TextInputField style={commonStyles.myTextFields} innerText="Text" fieldName="tags" value={this.state.taskAtHand.tags} saveStateFunc={this.theBetterSetState}/>
         </View>
 
         <Button title="save" onPress={this.saveIt} />
@@ -203,12 +226,13 @@ const TextInputField = (props) => {
 const styles = StyleSheet.create({
   mainContainer:{
     display: "flex",
-    width: 100,
-    height: 100,
-    backgroundColor: 'blue',
+    width: "50%",
+    minWidth:"400px",
+    margin: "auto",
+    height: "100%",
+    backgroundColor: 'rgb(255, 248, 232)',
   },
   container: {
-    backgroundColor: '#fff',
     justifyContent: "center",
     alignItems: "center",
   },
