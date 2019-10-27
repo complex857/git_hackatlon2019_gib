@@ -1,8 +1,8 @@
 export default [
   {
     "id":          0,
-    "name":        "Get out of bed!",
-    "description": "Getting out of bed sometimes feels like an achievemnt on it's own. Mark this diddit accomplished when you are not only out of bed, but when you changed your pajamas!",
+    "name":        "Give yourself a hug",
+    "description": "It’s that simple! Wrap both arms around yourself, close your eyes, and squeeze!  Hugs are a way to show love and support for people we care about. In this same way, hugging yourself is a way to help nurture your sense of self-care",
     "public":      true,
     "location":    "Bedroom",
     "time":        "9:00",
@@ -14,10 +14,23 @@ export default [
   },
   {
     "id":          0,
-    "name":        "Make the bed!",
-    "description": "You spend roughly a third of your life in your bedroom, and the appearance of your room has an effect on your mood. It’s hard to feel calm, relaxed, competent and grounded when you are surrounded by disorganization. A properly made bed (no, it doesn’t have to be up to military standards, just neat and unrumpled) instantly makes the entire room look pulled together, creating a subtle vibe of tranquility and competence. ",
+    "name":        "Talking to yourself",
+    "description": "Go find a mirror. Say something positive about yourself! Try to do this whenever you see yourself in the mirror. Some people carry flashcards to remind themselves of their good traits when they’re feeling particularly down. This is a behavioural psychology method to get you to replace bad thoughts with good ones.",
     "public":      true,
     "location":    "Bedroom",
+    "time":        "9:00",
+    "reocurrence": null,
+    "tags":        null,
+    "points":      5,
+    "rewards":     "low",
+    "author":      "Diddit Crew"
+  },
+  {
+    "id":          0,
+    "name":        "Learn something new: 5 minutes",
+    "description": "Take 5 minutes to learn something completely new, just for fun! You never know where the rabbit hold might lead you… Go ask a colleague about their job, or type a random word into Wikipedia. If you don’t like the topic, you only wasted 5 minutes! ",
+    "public":      true,
+    "location":    "Kitchen",
     "time":        "9:00",
     "reocurrence": null,
     "tags":        null,
@@ -27,15 +40,28 @@ export default [
   },
   {
     "id":          0,
-    "name":        "Do the dishes!",
-    "description": "While washing the dishes one should only be washing dishes, try to be fully present and focused totally on the task at hand. Why put so much stress on a simple thing?. Try to consider what you are doing their while you are elbow deep in warm soapy water",
+    "name":        "Lunch date",
+    "description": "Invite a colleague, or someone that you could know better, for lunch!  Branch out and give someone a chance to get to know you. Discover common interests or different points of view – keep your mind open and vary your social circle.",
     "public":      true,
     "location":    "Kitchen",
     "time":        "9:00",
     "reocurrence": null,
     "tags":        null,
-    "points":      20,
+    "points":      30,
     "rewards":     "low",
     "author":      "Diddit Crew"
-  }
+  },
+  {
+    "id":          0,
+    "name":        "Out with the old",
+    "description": "Time to refresh your wardrobe, or get rid of some clutter.  Donate your old clothes, recycle or upcycle some old junk, and bask in the glory that is your new, clean and tidy space. ",
+    "public":      true,
+    "location":    "Kitchen",
+    "time":        "9:00",
+    "reocurrence": null,
+    "tags":        null,
+    "points":      30,
+    "rewards":     "low",
+    "author":      "Diddit Crew"
+  },
 ]
